@@ -1,4 +1,4 @@
-# JavaScript-Practice
+# markdown practice
 
 ## this is h2
 
