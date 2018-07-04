@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+
+
+
+
+
+
+<script>
+    //練習:抓出兩個陣列中重複值
+    var array1 =[1,2,3,4,5];
+    var array2 = [2,5];
+
+    var result = array1.filter(function(item,index){
+        let check = false;
+        array2.forEach(element => {
+            if(element === item)
+             check = true;
+        });  
+        if(check==true)
+        return true
+    });
+
+    console.log(result);
+
+    //IIFEs example----------------------
+
+    //alert(test1);//undefined
+
+    var test1 = function (txt) {
+        return txt
+    }('hi');
+
+    alert(test1);
+
+
+
+    (function (txt) { alert(txt) }('byeboo')) //executing code on the fly
+
+
+
+    //// function statement
+    alert(aa)//undefined
+    var aa = 'aa'
+    alert(aa)//aa
+
+    ff();
+    alert(aa)//aa=>scope chain
+
+    function ff() {
+       var aa = 'bb'
+       alert(aa)//bb
+    }
+
+
+    //--------------------let vs var
+    function buildFunctions() {
+
+        var arr = [];
+
+        for (var i = 0; i < 3; i++) {//var=>let result 0,1,2          
+            arr.push(
+             function () {
+                 console.log(i);
+             }
+            )
+        }
+
+        return arr;
+    }
+
+    var fs = buildFunctions();
+    fs[0]();
+    fs[1]();
+    fs[2]();
+
+
+    //--------------------callback function
+    function a(callback) {
+
+        alert('this is a');
+
+        callback();
+    }
+
+    a(function () {
+        alert('this is anonymous')
+    })
+
+
+    //-----------------------promise
+    function timeout(ms) {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, ms, 'done');
+        });
+    }
+
+    timeout(100).then((value) => {
+        console.log(value);
+    });
+
+
+    //----------------------this
+    function thistest() {
+        
+        alert(this)
+
+        this.bb='bb';
+     
+        this.aa = {
+            bb:'this is aa.bb',
+            inputbb: function () {
+               
+                alert (this.bb)   
+    }
+        }
+
+       // return {'b':'aaaaa'};// => 若return物件，會蓋過上面屬性
+    }
+
+
+    //thistest()//window
+
+    //alert(bb)//bb
+
+    var c = thistest()//window
+
+    alert(c)//undefined
+   
+    var c = new thistest()// =>會建立thistest物件，若程式區段有this會指定到此物件容器，若無return關鍵字，會直接回傳此物件    
+    console.log(c.bb)
+    console.log(c)
+    c.aa.inputbb();
+
+
+
+    //-----------------------apply,call,bind
+
+    var person = {
+        firstname: 'John',
+        lastname: 'Doe',
+        fullname: function () {
+            return this.firstname+' '+this.lastname
+        }
+    }
+
+    var person2 = {
+        firstname: 'Alex',
+        lastname: 'Du',
+        fullname: function() {
+            return this.firstname + ' ' + this.lastname
+            
+        }
+    }
+
+    function introduce(aa) {
+        alert('my name is ' + this.fullname() +'  parameter: '+ aa);
+    }
+ 
+
+    introduce.call(person, 'aa')//將person物件當作this傳入
+
+    var intro = introduce.bind(person2, 'bb')//綁定person2物件
+ 
+    intro();
+    //introduce.bind(person2, 'bb') ->不會執行
+
+    var tellyourname = function (param) {
+        console.log('my name is ' + this.fullname() +' '+ param)
+    }.bind(person,'nice to meet you!')
+
+    tellyourname();
+
+    var tellyourname2 = function (param) {
+        console.log('my name is ' + this.fullname() + ' ' + param)
+    }
+    tellyourname2.apply(person2,['nice','to','meet','you'])
+
+//按鍵偵測事件~
+ document.onkeydown = function(){
+ if(window.event.keyCode == 8)
+        alert('yo!')
+ }
+   
+
+
+</script>
+</body>
+</html>
