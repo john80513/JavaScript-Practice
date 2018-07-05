@@ -14,7 +14,45 @@
 
 
 <script>
-    //練習:抓出兩個陣列中重複值
+
+    //進位轉換---------------------
+
+    //Number.prototype.toString() 
+    var binary = (2048).toString(2);
+    var hex = (2048).toString(16)
+    console.log(`bin:${binary} hex:${hex}`);
+
+    //16進位轉10進位
+    var decimalfromBinary = Number('0b10010011101101');
+    var decimalfromHex = Number('0x45F');
+    var decimalfromBinary02 = parseInt('0111000',2);
+    var decimalfromHex02 = parseInt('20A',16);
+    console.log(`decimalfromBinary:${decimalfromBinary} decimalfromHex:${decimalfromHex}`);
+    console.log(`decimalfromBinary02:${decimalfromBinary02} decimalfromHex02:${decimalfromHex02}`);
+
+    //Unicode 轉換----------------------
+
+    var uni01 = '你好'.codePointAt().toString(16);
+
+    console.log(`你好的Unicode是U${uni01}`);
+
+    console.log('\u2661 \u81fa\u7063');//Basic Multilingual Plane => \u<碼點>
+
+    console.log('\u{1F436}');//Supplementary planes => \u{ 碼點 }
+
+    console.log('\x41\x42\x43');  //ASCII
+
+    // const 與 物件-----------------
+    const family = {
+     mom: '老媽',
+     me: '小明',
+     sister: '小橙'
+    };
+    family.father = '爸爸';//物件本身by reference，所以OK
+    console.log(family)
+    //family = {} //會報錯，因為此寫法會修改物件本身
+
+    //練習:抓出兩個陣列中重複值---------------------
     var array1 =[1,2,3,4,5];
     var array2 = [2,5];
 
@@ -30,37 +68,53 @@
 
     console.log(result);
 
+
+//按鍵偵測事件-----------------------
+document.onkeydown = function(){
+ if(window.event.keyCode == 8)
+        console.log('You press Backsapce yo!');
+ }
+   
+
+
     //IIFEs example----------------------
 
     //alert(test1);//undefined
 
     var test1 = function (txt) {
         return txt
-    }('hi');
+    }('I use IIEF!');
 
-    alert(test1);
+    console.log(test1);
 
-
-
-    (function (txt) { alert(txt) }('byeboo')) //executing code on the fly
+    (function (txt) { console.log(txt) }('executing code on the fly')) //executing code on the fly
 
 
 
-    //// function statement
-    alert(aa)//undefined
-    var aa = 'aa'
-    alert(aa)//aa
+    // function's execution context----------
+
+    console.log(aa)//undefined
+    var aa = 'I am global aa'
 
     ff();
-    alert(aa)//aa=>scope chain
+
+    console.log(aa)
 
     function ff() {
-       var aa = 'bb'
-       alert(aa)//bb
+       var aa = 'I am Func aa'
+       console.log(aa)
+      
+    function ff2(){           
+        console.log(aa)
+        //var aa  =>The result above will be undefined because of hoisting.
+    }
+        ff2()//scope chain
     }
 
+   
 
     //--------------------let vs var
+
     function buildFunctions() {
 
         var arr = [];
@@ -85,13 +139,13 @@
     //--------------------callback function
     function a(callback) {
 
-        alert('this is a');
+        console.log('this is a');
 
         callback();
     }
 
     a(function () {
-        alert('this is anonymous')
+        console.log('this is anonymous')
     })
 
 
@@ -110,7 +164,7 @@
     //----------------------this
     function thistest() {
         
-        alert(this)
+        console.log(this)
 
         this.bb='bb';
      
@@ -118,7 +172,7 @@
             bb:'this is aa.bb',
             inputbb: function () {
                
-                alert (this.bb)   
+                console.log (this.bb)
     }
         }
 
@@ -132,11 +186,13 @@
 
     var c = thistest()//window
 
-    alert(c)//undefined
+    console.log(c)//undefined, because thistest doesn't return any value.
    
     var c = new thistest()// =>會建立thistest物件，若程式區段有this會指定到此物件容器，若無return關鍵字，會直接回傳此物件    
     console.log(c.bb)
-    console.log(c)
+    
+    //console.log(c)
+    
     c.aa.inputbb();
 
 
@@ -161,7 +217,7 @@
     }
 
     function introduce(aa) {
-        alert('my name is ' + this.fullname() +'  parameter: '+ aa);
+        console.log('my name is ' + this.fullname() +'  parameter: '+ aa);
     }
  
 
@@ -183,12 +239,6 @@
     }
     tellyourname2.apply(person2,['nice','to','meet','you'])
 
-//按鍵偵測事件~
- document.onkeydown = function(){
- if(window.event.keyCode == 8)
-        alert('yo!')
- }
-   
 
 
 </script>
