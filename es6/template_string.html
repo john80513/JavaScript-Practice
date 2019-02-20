@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+
+
+<script>
+// #1 樣板字串
+// 將以下改寫成 Template String 寫法
+const people = [
+  {
+    name: '小明',
+    friends: 2
+  },
+  {
+    name: '阿姨',
+    friends: 999
+  },
+  {
+    name: '杰倫',
+    friends: 0
+  }
+]
+
+
+let originString = '我叫做 ' + people[0].name;
+let originUl = '<ul>\
+  <li>我叫做 ' + people[0].name + '</li>\
+  <li>我叫做 ' + people[1].name + '</li>\
+  <li>我叫做 ' + people[2].name + '</li>\
+</ul>';
+
+let newUl = `我叫做 ${people[0].name}
+<ul>
+  <li>我叫做 ${people[0].name}</li>
+  <li>我叫做 ${people[1].name}</li>
+  <li>我叫做 ${people[2].name}</li>
+</ul>
+`
+let ul = `
+<ul>
+${people.map(person=>`<li>${person.name}</li>`).join('')}
+</ul>
+`
+
+console.log(people.map(function(i){//返回為陣列，故以上使用join('')組成自串輸出
+  return i.name 
+}));
+
+console.log(originString, originUl);
+
+console.log(newUl);
+
+$('#app').html(ul);
+
+</script> 
+      
+  </body>
+</html>

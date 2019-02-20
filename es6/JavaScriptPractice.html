@@ -10,18 +10,15 @@
 
 
 
-
-
-
 <script>
 
 
     //隨機成功或失敗(true or false)
-    console.log(parseInt(Math.random() * 2));
+    var arr = [true, false];
+    var bol = arr[Math.floor(Math.random()*arr.length)];
+    console.log(bol);
 
-    //進位轉換---------------------
-
-    //Number.prototype.toString() 
+    //進位轉換---------------------  
     var binary = (2048).toString(2);
     var hex = (2048).toString(16)
     console.log(`bin:${binary} hex:${hex}`);
@@ -92,8 +89,6 @@ document.onkeydown = function(){
     console.log(test1);
 
     (function (txt) { console.log(txt) }('executing code on the fly')) //executing code on the fly
-
-
 
     // function's execution context----------
 

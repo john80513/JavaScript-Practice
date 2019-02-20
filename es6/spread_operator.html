@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+
+
+<script>
+// #1 使用展開語法，合併以下陣列
+// let groupA = ['小明', '杰倫', '阿姨'];
+// let groupB = ['老媽', '老爸'];
+// let groupAll = [...groupA,...groupB];//將陣列中全部值一個一個取出再放入一個新的陣列
+
+//#2 淺複製觀念說明 (shallow copy)
+let groupA = ['小明', '杰倫', '阿姨'];
+let groupB = groupA;//[...groupA] =>這樣會產生新陣列，故阿明不會被加入
+groupB.push('阿明');
+console.log(groupA); // 請問此時的 groupA 值為何=> 包含阿明，因為陣列by reference
+
+
+// #3 類陣列觀念說明
+let doms = document.querySelectorAll('li');//類陣列
+console.log(doms);
+console.log([...doms])
+
+
+// #4 類陣列觀念說明
+var originCash = 1000;
+function updateEasyCard() {
+  let arg = [...arguments];
+  let sum = arg.reduce(function (accumulator, currentValue) {
+    return accumulator + currentValue;
+  }, 0);
+  console.log('我有 ' + sum + ' 元');
+}
+updateEasyCard(originCash); // 我有 1000 元
+updateEasyCard(originCash,10, 50, 100, 50, 5, 1, 1, 1, 500); // 我有 1718 元
+
+
+// #5 其餘參數
+function moreMoney(varible,...money) {//會以陣列的方式呈現
+   console.log(varible,money);
+}
+moreMoney('yo',100, 200, 300);
+</script> 
+        
+  </body>
+</html>

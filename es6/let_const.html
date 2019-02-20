@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ES6 let, const</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <meta charset="UTF-8">   
+  </head>
+  
+  <body>
+        
+<script>
+// #1
+// 修改 var -> let
+var mom = '老媽';
+(function () {
+  console.log(mom);
+})();
+
+// #2
+// 修改 var -> let
+// function varMing () {
+//   var ming = '小明';
+//   if (true) {
+//     var ming = '杰哥';  
+//     // 這裡的 ming 依然是外層的小明，所以小明即將被取代
+//   }
+//   console.log(ming);  // '杰哥'
+// }
+
+
+// #3
+// 修改 var -> let
+// for (let i = 0; i < 10; i++) {
+//   console.log(i);
+//   setTimeout(function () {
+//     console.log('這執行第' + i + '次');
+//   }, 10);
+// }
+
+// #4
+// const
+// const ming = '鐵錚錚男子漢';
+
+// #5
+// const 與 物件
+const family = {
+  mom: '老媽',
+  me: '小明',
+  sister: '小橙'
+};
+family.father = '爸爸';//物件本身by reference，所以OK
+console.log(family)
+//family = {} //會報錯，因為此寫法會修改物件本身
+
+
+// #6
+// 額外問題，不使用 let，上述答案如何解答
+
+//方法1 IIFE
+for (var i = 0; i < 10; i++) {
+    console.log(i);
+    (function (j) {
+        setTimeout(function () {
+            console.log('這執行第' + j + '次');
+        }, 10);
+    }(i));
+}
+
+
+//方法2
+// for (var i = 0; i < 10; i++) {
+//     console.log(i);
+//     timer(i);
+// }
+ 
+// function timer(i){
+//     setTimeout(function () {
+//         console.log('這執行第' + i + '次');
+//     }, 10);
+// }
+
+
+
+//及時執行不管延遲
+for (var i = 0; i < 10; i++) {
+    console.log(i);
+        setTimeout(function (j) {
+            console.log('這執行第' + j + '次');
+        }(i), 10)   
+}
+
+</script>        
+  </body>
+</html>

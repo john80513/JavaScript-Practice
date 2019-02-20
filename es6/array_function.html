@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+
+<script>
+// #1 樣板字串
+// 將以下改寫成 Template String 寫法
+const people = [
+  {
+    name: '小明',
+    money: 500
+  },
+  {
+    name: '漂亮阿姨',
+    money: 3000
+  },
+  {
+    name: '杰倫',
+    money: 60000
+  },
+  // {
+  //   name: '老媽',
+  //   money: Infinity
+  // }
+];
+
+// forEach 與 map
+// 將所有物件增加 icash 有多少金額的欄位
+
+people.forEach((item,index,array)=>{
+  if(item.money<1000)
+  item.money+=1000;
+  console.log(item);
+})
+
+
+let array = people.map((item,index,array)=>{//會回傳一個新的陣列，且陣列長度與原本被處理陣列一定相同。
+  if(item.money==3000) 
+  return {...item,icash:item.money+500}//所以若用條件篩選，其它陣列位置會回傳undefined
+})
+console.log(array);
+
+// filter
+// 挑出金額少於 5000 的物件
+let filterTest = people.filter((person,i,array)=>{
+   if (person.money>2000)
+    return true //若return為true的物件就會被加入回傳的新陣列中
+})
+console.log(filterTest);
+// find
+// 1. 找到金額 = 500 的物件
+// 2. 找到 > 5000 的物件
+
+let findTest = people.find((person,i,array)=>{
+   if (person.money>2000)
+    return true //若return為true的物件就回傳，但只會回傳match的第一筆資料(依該資料原本型態回傳，並不會產生新陣列)
+})
+console.log(findTest);
+
+// every
+// 1. 所有物件是否都超過 10000 元
+// 2. 是否所有物件超過 300 元
+
+let everyTest = people.every((person,i,array)=>{  
+    return person.money>2000 //return true or false，但需每個結果比對都為true，才會回傳true
+})
+console.log(everyTest);//false
+
+// some
+// 1. 是否有物件超過 10000 元
+// 2. 是否有物件持有金額少於 300元
+
+let someTest = people.some((person,i,array)=>{
+    return person.money>2000 //return true or false，只需一個結果為true，就會回傳true
+})
+
+console.log(someTest);//true
+
+// reduce
+// 去除掉老媽，請問剩下的人有多少錢？
+
+const newNumber = people.reduce((prev,item,index)=>{
+  console.log(prev);
+  //return prev+item.money;
+  return Math.max(prev,item.money);//比大小，將最大的值回傳
+},0)
+
+console.log('最終結果:'+newNumber);
+
+
+
+
+ //練習:抓出兩個陣列中重複值---------------------
+ var array1 =[1,2,3,4,5];
+    var array2 = [2,5];
+
+    var result = array1.filter(function(item,index){
+        let check = false;
+        array2.forEach(element => {
+            if(element === item)
+             check = true;
+        });  
+        if(check==true)
+        return true
+    });
+
+    console.log(result);
+
+</script> 
+    
+  </body>
+</html>
