@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+
+
+<script>
+
+//建立階段 
+//當 function 被呼叫了但在開始執行內部程式碼之前:
+//1.建立一個 scope chain 作用域鍊
+//2.建立變數，function，和參數(arguments object)=>*在建立階段就會賦值
+//3.設定 this 的值
+
+//執行階段
+//賦值，設定 function 的參考和解譯執行程式碼
+
+
+//example
+function foo(i) {
+  var a = 'hello';
+  var b = function B() {
+
+  };
+  function c() {
+
+  }
+}
+foo(22);
+
+//實際建立階段:
+// fooExecutionContext = {
+//   scopeChain: { ... },
+//   variableObject: {
+//     arguments: {
+//       0: 22,
+//       length: 1
+//     },
+//     i: 22,
+//     c: pointer to function c()
+//     a: undefined,
+//     b: undefined
+//   },
+//   this: { ... }
+// }
+
+//執行階段完成後:
+// fooExecutionContext = {
+//   scopeChain: { ... },
+//   variableObject: {
+//     arguments: {
+//       0: 22,
+//       length: 1
+//     },
+//     i: 22,
+//     c: pointer to function c()
+//     a: 'hello',
+//     b: pointer to function B()
+//   },
+//   this: { ... }
+// }
+
+
+
+//advance ex
+(function () {
+  console.log("foo: " + typeof foo); // function pointer
+  console.log("bar: " + typeof bar); // undefined
+
+  var foo = 'hello',
+      bar = function() {
+        return 'world';
+      };
+  function foo() {
+    return 'hello';
+  }
+}());
+
+
+</script> 
+        
+  </body>
+</html>
